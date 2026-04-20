@@ -1,0 +1,1018 @@
+/* 美食制作 - iOS 风格移动端设计 */
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --text2: #86868b;
+  --accent: #ff6b35;
+  --accent2: #ff9500;
+  --green: #34c759;
+  --red: #ff3b30;
+  --blue: #007aff;
+  --border: #e5e5ea;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+  padding-bottom: calc(60px + var(--safe-bottom));
+}
+
+/* ===== 页面容器 ===== */
+.page {
+  padding: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 页头 ===== */
+.page-header {
+  padding: 20px 0 16px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--text2);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* ===== 用餐人数选择器 ===== */
+.servings-selector {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+
+.servings-label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.servings-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.serving-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.serving-btn:active {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(0.92);
+}
+
+.serving-count {
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* ===== 冰箱摘要 ===== */
+.fridge-summary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+}
+
+.btn-recommend {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-recommend:active {
+  background: rgba(255,255,255,0.4);
+}
+
+.empty-tip {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text2);
+  font-size: 15px;
+  box-shadow: var(--shadow);
+}
+
+/* ===== 冰箱食材标签 ===== */
+.fridge-items {
+  margin-bottom: 16px;
+}
+
+.fridge-category {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+}
+
+.fridge-category h3 {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.fridge-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fridge-tag {
+  background: #fff3ed;
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.6;
+}
+
+.tag-remove:active { opacity: 1; }
+
+/* ===== 食材选择器 ===== */
+.ingredient-picker {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.picker-header h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.btn-add-custom {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(255,107,53,0.3);
+  transition: all 0.15s;
+}
+
+.btn-add-custom:active {
+  transform: scale(0.95);
+}
+
+/* 自定义弹窗 */
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+
+.custom-modal {
+  background: var(--card);
+  border-radius: 20px 20px 0 0;
+  padding: 24px 20px;
+  padding-bottom: calc(24px + var(--safe-bottom));
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.custom-modal h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-field {
+  margin-bottom: 14px;
+}
+
+.custom-field label {
+  display: block;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.custom-field input,
+.custom-field select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.custom-field input:focus,
+.custom-field select:focus {
+  border-color: var(--accent);
+}
+
+.custom-row {
+  display: flex;
+  gap: 12px;
+}
+
+.custom-row .custom-field {
+  flex: 1;
+}
+
+.btn-custom-add {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: inherit;
+}
+
+.btn-custom-add:active {
+  opacity: 0.85;
+}
+
+.btn-quick-add {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-quick-add:active { opacity: 0.85; }
+
+.no-results {
+  text-align: center;
+  color: var(--text2);
+  padding: 20px;
+  font-size: 14px;
+}
+
+.search-box {
+  margin-bottom: 12px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.search-box input:focus {
+  border-color: var(--accent);
+}
+
+.category-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.cat-tab {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: none;
+  font-size: 13px;
+  color: var(--text2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.cat-tab.active, .cat-tab:active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.ingredient-grid {
+  max-height: 320px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ingredient-category h4 {
+  font-size: 13px;
+  color: var(--text2);
+  margin: 12px 0 8px;
+}
+
+.ingredient-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+}
+
+.ingredient-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.ingredient-btn:active {
+  transform: scale(0.95);
+}
+
+.ingredient-btn.in-fridge {
+  background: #fff3ed;
+  border-color: var(--accent);
+}
+
+.ing-emoji { font-size: 24px; }
+.ing-name { font-size: 12px; color: var(--text); }
+
+/* ===== 菜谱列表 ===== */
+.btn-ai-recommend {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.btn-ai-recommend:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.btn-ai-recommend:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-result {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.ai-loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--text2);
+}
+
+.ai-loading::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
+.ai-content {
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.ai-content h3 { color: var(--accent); margin: 12px 0 6px; font-size: 16px; }
+.ai-content h4 { color: var(--text); margin: 10px 0 4px; font-size: 15px; }
+.ai-content strong { color: var(--accent); }
+
+.ai-error {
+  color: var(--red);
+  padding: 12px;
+  text-align: center;
+}
+
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recipe-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.recipe-card:active {
+  transform: scale(0.98);
+}
+
+.recipe-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.recipe-category {
+  background: #f0f0f5;
+  color: var(--text2);
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.recipe-difficulty {
+  color: var(--accent2);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.recipe-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 10px;
+}
+
+.match-bar {
+  height: 4px;
+  background: #f0f0f5;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.match-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.missing-note {
+  font-size: 12px;
+  color: var(--accent2);
+}
+
+.match-full {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* ===== 菜谱详情 ===== */
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-bottom: 8px;
+  font-family: inherit;
+}
+
+.recipe-detail-page .page-header h1 {
+  font-size: 24px;
+}
+
+.recipe-section {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.recipe-section h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ingredient-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredient-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.ingredient-row:last-child { border-bottom: none; }
+
+.ingredient-row .ing-name {
+  font-size: 15px;
+}
+
+.ingredient-row .ing-amount {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.step-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.step-text {
+  font-size: 15px;
+  line-height: 1.6;
+  padding-top: 3px;
+}
+
+.btn-ai-help {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-ai-help:active { opacity: 0.85; }
+
+/* ===== 聊天页面 ===== */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px - var(--safe-bottom));
+  padding-bottom: 0;
+}
+
+.chat-header {
+  flex-shrink: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-welcome {
+  text-align: center;
+  color: var(--text2);
+  padding: 40px 20px;
+  font-size: 15px;
+}
+
+.chat-msg {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.chat-msg.user {
+  flex-direction: row-reverse;
+}
+
+.msg-avatar {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: #f0f0f5;
+}
+
+.msg-bubble {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.chat-msg.user .msg-bubble {
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg.assistant .msg-bubble {
+  background: var(--card);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.chat-msg.assistant .msg-bubble strong {
+  color: var(--accent);
+}
+
+.chat-msg.assistant .msg-bubble h3 {
+  color: var(--accent);
+  margin: 8px 0 4px;
+  font-size: 15px;
+}
+
+.chat-msg.assistant .msg-bubble h4 {
+  color: var(--text);
+  margin: 8px 0 4px;
+  font-size: 14px;
+}
+
+.chat-input-area {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  padding-bottom: calc(12px + var(--safe-bottom));
+  background: var(--bg);
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  font-size: 15px;
+  outline: none;
+  font-family: inherit;
+}
+
+.chat-input-area input:focus {
+  border-color: var(--accent);
+}
+
+.btn-send {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-send:active { opacity: 0.85; }
+
+/* ===== 设置页面 ===== */
+.setting-section {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.setting-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.setting-desc {
+  color: var(--text2);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.setting-desc a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.setting-input {
+  display: flex;
+  gap: 8px;
+}
+
+.setting-input input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.setting-input input:focus {
+  border-color: var(--accent);
+}
+
+.btn-save {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.setting-status {
+  font-size: 13px;
+  color: var(--text2);
+  margin-top: 8px;
+}
+
+.btn-danger {
+  padding: 10px 20px;
+  background: #fff;
+  color: var(--red);
+  border: 1.5px solid var(--red);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-danger:active {
+  background: var(--red);
+  color: #fff;
+}
+
+/* ===== 底部导航 ===== */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(60px + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 0.5px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 16px;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.nav-icon { font-size: 22px; }
+
+.nav-label {
+  font-size: 10px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+.nav-btn.active .nav-label {
+  color: var(--accent);
+}
+
+/* ===== 响应式 ===== */
+@media (min-width: 481px) {
+  .ingredient-items {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+}
+
+/* ===== 暗色模式 ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --card: #1c1c1e;
+    --text: #f5f5f7;
+    --text2: #98989d;
+    --border: #38383a;
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  .navbar {
+    background: rgba(28,28,30,0.92);
+  }
+
+  .fridge-tag {
+    background: #3a2a1f;
+  }
+
+  .recipe-category {
+    background: #2c2c2e;
+    color: var(--text2);
+  }
+
+  .match-bar {
+    background: #2c2c2e;
+  }
+
+  .ingredient-btn {
+    background: var(--card);
+  }
+
+  .ingredient-btn.in-fridge {
+    background: #3a2a1f;
+    border-color: var(--accent);
+  }
+
+  .msg-avatar {
+    background: #2c2c2e;
+  }
+
+  .chat-msg.assistant .msg-bubble {
+    background: var(--card);
+  }
+
+  .chat-input-area {
+    background: var(--bg);
+  }
+
+  .search-box input, .setting-input input, .chat-input-area input {
+    background: #2c2c2e;
+    color: var(--text);
+    border-color: #38383a;
+  }
+
+  .btn-danger {
+    background: var(--card);
+  }
+}
