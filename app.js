@@ -1006,7 +1006,7 @@ const App = {
                 class="search-input"
                 placeholder="筛选常用食材，例如：鸡翅、西兰花、虾仁"
                 value="${this.escapeHtml(this.state.ingredientSearch)}"
-                onchange="App.setIngredientSearch(this.value)"
+                oninput="App.setIngredientSearch(this.value)"
               >
             </div>
 
@@ -1326,7 +1326,7 @@ const App = {
             </div>
             <p class="support-copy">从 <a href="https://open.bigmodel.cn" target="_blank" rel="noreferrer">open.bigmodel.cn</a> 获取 API Key。未配置时，本地推荐仍可使用。</p>
             <div class="settings-row">
-              <input type="password" id="glm-key" class="search-input" value="${this.escapeHtml(GLM_API.key)}" placeholder="输入你的 GLM API Key">
+              <input type="password" id="glm-key" class="search-input" placeholder="${GLM_API.key ? '已配置（输入新值可覆盖）' : '输入你的 GLM API Key'}">
               <button class="primary-button" onclick="App.saveApiKey()">保存</button>
             </div>
             <p class="support-copy">${GLM_API.key ? '已配置，可以用 AI 生成今日菜单。' : '未配置，当前只使用本地规则推荐。'}</p>

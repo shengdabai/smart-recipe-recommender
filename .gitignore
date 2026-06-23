@@ -11,6 +11,7 @@ id_rsa
 id_dsa
 .npmrc
 .DS_Store
-.omc/
 .codex/
 .claude/local/
+*.log
+node_modules/
